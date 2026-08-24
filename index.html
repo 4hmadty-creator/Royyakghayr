@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ROYYAK OPTICS | Precision Eyewear Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="loading-state">
+
+  <!-- Preloader Screen -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-glass">
+      <div class="preloader-logo-wrap">
+        <div class="preloader-emblem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+        <div class="preloader-titles">
+          <span class="preloader-brand" data-en="ROYYAK OPTICS" data-ar="رؤياك للبصريات">ROYYAK OPTICS</span>
+          <span class="preloader-sub" data-en="Crafting Vision • Since 2024" data-ar="صناعة الرؤية • منذ ٢٠٢٤">Crafting Vision • Since 2024</span>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div id="progressBar" class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-stats">
+          <span id="progressText">0%</span>
+          <span id="framesLoadedText">0 / 300 Frames</span>
+        </div>
+      </div>
+
+      <button id="startExperienceBtn" class="start-btn hidden">
+        <span data-en="Enter Experience" data-ar="ابدأ التجربة">Enter Experience</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <div class="brand-badge">
+        <span class="brand-title">ROYYAK</span>
+        <span class="brand-tag">OPTICS</span>
+      </div>
+      <span class="brand-ar">رؤياك</span>
+    </div>
+
+    <!-- Quick Chapter Navigation (Pill Tabs) -->
+    <nav class="chapter-nav">
+      <button class="chapter-pill active" data-frame="1" data-label="intro">
+        <span class="pill-dot"></span>
+        <span class="pill-label" data-en="01. Identity" data-ar="٠١. الهوية">01. Identity</span>
+      </button>
+      <button class="chapter-pill" data-frame="60" data-label="aviator">
+        <span class="pill-dot"></span>
+        <span class="pill-label" data-en="02. Aviator" data-ar="٠٢. أفياتور">02. Aviator</span>
+      </button>
+      <button class="chapter-pill" data-frame="180" data-label="rectangular">
+        <span class="pill-dot"></span>
+        <span class="pill-label" data-en="03. Rectangular" data-ar="٠٣. مستطيل كلاسيك">03. Rectangular</span>
+      </button>
+      <button class="chapter-pill" data-frame="300" data-label="tortoise">
+        <span class="pill-dot"></span>
+        <span class="pill-label" data-en="04. Tortoise" data-ar="٠٤. تورتويس هافانا">04. Tortoise</span>
+      </button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="nav-controls">
+      <button id="soundToggle" class="control-icon-btn" title="Toggle Sound Feedback" aria-label="Toggle Sound">
+        <svg id="soundIconOn" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="soundIconOff" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+
+      <button id="langToggle" class="lang-switch-btn" title="Switch Language" aria-label="Language Switch">
+        <span class="lang-text">العربية</span>
+      </button>
+
+      <button id="specDrawerOpen" class="cta-nav-btn">
+        <span data-en="Specs & Details" data-ar="المواصفات">Specs & Details</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Scroll Linked Animation Stage Container -->
+  <main id="scrollContainer" class="scroll-track">
+
+    <!-- Sticky Stage that stays fixed as user scrolls -->
+    <div class="stage-sticky-wrapper">
+      
+      <!-- Canvas Layer -->
+      <div class="canvas-viewport" id="canvasViewport">
+        <canvas id="sequenceCanvas"></canvas>
+        <div class="canvas-drag-hint" id="dragHint">
+          <span class="drag-icon">↔</span>
+          <span data-en="Drag or Scroll to Explore" data-ar="اسحب أو مرر للاستكشاف">Drag or Scroll to Explore</span>
+        </div>
+      </div>
+
+      <!-- Floating Dynamic Story Overlays (Synchronized with Frames) -->
+      <div class="narrative-overlay" id="narrativeOverlay">
+        
+        <!-- Story Card 1: Intro / Identity -->
+        <article class="story-card active" id="cardIntro" data-range="1-40">
+          <div class="card-glass">
+            <span class="card-tag" data-en="SAUDI CRAFTED HERITAGE" data-ar="إرث وتصميم سعودي">SAUDI CRAFTED HERITAGE</span>
+            <h1 class="card-title" data-en="Visionary Optics<br>Engineered in Saudi Arabia" data-ar="بصريات استثنائية<br>برؤية سعودية">Visionary Optics<br>Engineered in Saudi Arabia</h1>
+            <p class="card-desc" data-en="A fusion of architectural design, lightweight aerospace materials, and precision German optics." data-ar="مزيج من التصميم الهندسي المتقن، خامات الطيران فائقة الخفة، والعدسات البصرية الدقيقة.">A fusion of architectural design, lightweight aerospace materials, and precision German optics.</p>
+            <div class="card-stats">
+              <div class="stat-item">
+                <span class="stat-num">300</span>
+                <span class="stat-sub" data-en="Frames" data-ar="إطار متسلسل">Frames</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-num">100%</span>
+                <span class="stat-sub" data-en="UV400 Shield" data-ar="حماية شاملة">UV400 Shield</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-num">18g</span>
+                <span class="stat-sub" data-en="Ultra-light" data-ar="خفة استثنائية">Ultra-light</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Story Card 2: Aviator -->
+        <article class="story-card" id="cardAviator" data-range="45-115">
+          <div class="card-glass">
+            <span class="card-tag tag-accent" data-en="SERIES 01 // ICONIC" data-ar="السلسلة ٠١ // أيقونة">SERIES 01 // ICONIC</span>
+            <h2 class="card-title" data-en="Royyak Aviator<br>Precision Metalwork" data-ar="رؤياك أفياتور<br>هندسة معدنية فائقة">Royyak Aviator<br>Precision Metalwork</h2>
+            <p class="card-desc" data-en="Double bridge aero architecture with custom smoky tint lenses engineered for peak desert sunlight reflection." data-ar="تصميم الجسر المزدوج الانسيابي مع عدسات مظللة مصممة لتحمل أشد درجات الانعكاس والسطوع.">Double bridge aero architecture with custom smoky tint lenses engineered for peak desert sunlight reflection.</p>
+            <ul class="card-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Grade 5 Titanium Bridge & Rims" data-ar="جسر وإطار من التيتانيوم فئة ٥">Grade 5 Titanium Bridge & Rims</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Anti-reflective Hydrophobic Coating" data-ar="طبقة طاردة للماء ومضادة للتوهج">Anti-reflective Hydrophobic Coating</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Story Card 3: Rectangular -->
+        <article class="story-card" id="cardRectangular" data-range="140-220">
+          <div class="card-glass">
+            <span class="card-tag tag-cyan" data-en="SERIES 02 // ARCHITECTURAL" data-ar="السلسلة ٠٢ // المعمارية">SERIES 02 // ARCHITECTURAL</span>
+            <h2 class="card-title" data-en="Royyak Rectangular<br>High-Density Acetate" data-ar="رؤياك مستطيل كلاسيك<br>أسيتات عالي الكثافة">Royyak Rectangular<br>High-Density Acetate</h2>
+            <p class="card-desc" data-en="Structured bold profile tailored for daily executive clarity, featuring blue-light blocking and scratch resistance." data-ar="مظهر قوي وأنيق مصمم خصيصاً للاستخدام اليومي المريح مع حماية من الأشعة الزرقاء ومقاومة للخدش.">Structured bold profile tailored for daily executive clarity, featuring blue-light blocking and scratch resistance.</p>
+            <ul class="card-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Hand-beveled Japanese Acetate" data-ar="أسيتات ياباني مصقول يدويًا">Hand-beveled Japanese Acetate</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Blue Light & Computer Glare Defense" data-ar="حماية متقدمة من شاشات الأجهزة">Blue Light & Computer Glare Defense</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Story Card 4: Tortoise -->
+        <article class="story-card" id="cardTortoise" data-range="245-300">
+          <div class="card-glass">
+            <span class="card-tag tag-gold" data-en="SERIES 03 // MASTERPIECE" data-ar="السلسلة ٠٣ // التحفة">SERIES 03 // MASTERPIECE</span>
+            <h2 class="card-title" data-en="Royyak Havana Tortoise<br>Timeless Elegance" data-ar="رؤياك تورتويس هافانا<br>أناقة خالدة">Royyak Havana Tortoise<br>Timeless Elegance</h2>
+            <p class="card-desc" data-en="Intricate amber tortoise pattern paired with warm optical gradient and durable 5-barrel custom hinges." data-ar="نقشة التورتويس الكهرمانية الدافئة مع مفصلات خماسية قوية لمتانة تدوم مدى الحياة.">Intricate amber tortoise pattern paired with warm optical gradient and durable 5-barrel custom hinges.</p>
+            <ul class="card-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Hand-poured Havana Tortoise Matrix" data-ar="مصفوفة ألوان كهرمانية فريدة لكل قطعة">Hand-poured Havana Tortoise Matrix</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="German Custom 5-Barrel Precision Hinges" data-ar="مفصلات ألمانية خماسية دقيقة">German Custom 5-Barrel Precision Hinges</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Bottom Interactive HUD Controller -->
+      <footer class="bottom-hud">
+        <div class="hud-inner">
+          
+          <!-- Play / Pause Controls -->
+          <div class="hud-playback">
+            <button id="playBtn" class="hud-icon-btn" title="Play / Pause Sequence (Space)" aria-label="Play / Pause">
+              <svg id="playIcon" class="icon" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg id="pauseIcon" class="icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+
+            <!-- Speed selector -->
+            <div class="speed-selector">
+              <button class="speed-btn" data-speed="0.5">0.5x</button>
+              <button class="speed-btn active" data-speed="1.0">1x</button>
+              <button class="speed-btn" data-speed="2.0">2x</button>
+            </div>
+          </div>
+
+          <!-- Interactive Scrubber Bar -->
+          <div class="hud-scrubber-wrap">
+            <div class="scrubber-track" id="scrubberTrack">
+              <div class="scrubber-fill" id="scrubberFill"></div>
+              <div class="scrubber-thumb" id="scrubberThumb"></div>
+              
+              <!-- Keyframe Chapter Markers -->
+              <div class="scrubber-mark" style="left: 0%;" title="Intro (1)"></div>
+              <div class="scrubber-mark" style="left: 20%;" title="Aviator (60)"></div>
+              <div class="scrubber-mark" style="left: 60%;" title="Rectangular (180)"></div>
+              <div class="scrubber-mark" style="left: 100%;" title="Tortoise (300)"></div>
+            </div>
+          </div>
+
+          <!-- Current Frame & Status Info -->
+          <div class="hud-info">
+            <span class="hud-frame-indicator">
+              <span class="hud-accent">FRAME</span>
+              <span id="currentFrameDisplay" class="hud-mono">001</span>
+              <span class="hud-dim">/ 300</span>
+            </span>
+            
+            <button id="resetScrollBtn" class="hud-icon-btn" title="Back to Top (Home)" aria-label="Reset">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Product Specifications Modal / Drawer -->
+  <aside id="specDrawer" class="spec-drawer" aria-hidden="true">
+    <div class="spec-backdrop" id="specDrawerClose"></div>
+    <div class="spec-content">
+      <div class="spec-header">
+        <div class="spec-header-title">
+          <span class="spec-badge" data-en="CATALOG 2024" data-ar="كتالوج ٢٠٢٤">CATALOG 2024</span>
+          <h2 data-en="Product Line Specifications" data-ar="المواصفات الفنية للتشكيلة">Product Line Specifications</h2>
+        </div>
+        <button id="specDrawerCloseBtn" class="spec-close-btn" aria-label="Close Specs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="spec-grid">
+        
+        <!-- Spec 1: Aviator -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-model-code">RYK-01-AV</span>
+            <h3 data-en="Royyak Aviator" data-ar="رؤياك أفياتور">Royyak Aviator</h3>
+          </div>
+          <div class="spec-card-body">
+            <div class="spec-row">
+              <span class="spec-label" data-en="Frame Material" data-ar="مادة الإطار">Frame Material</span>
+              <span class="spec-val" data-en="Titanium Alloy (Grade 5)" data-ar="سبيكة تيتانيوم فئة ٥">Titanium Alloy (Grade 5)</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Lens Tech" data-ar="تقنية العدسات">Lens Tech</span>
+              <span class="spec-val" data-en="Polarized Smoky Grey UV400" data-ar="مستقطبة رمادي دخاني UV400">Polarized Smoky Grey UV400</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Dimensions" data-ar="المقاسات">Dimensions</span>
+              <span class="spec-val">58-14-145 mm</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Weight" data-ar="الوزن">Weight</span>
+              <span class="spec-val">17.8 grams</span>
+            </div>
+          </div>
+          <button class="spec-select-btn" data-jump="60" data-en="Inspect Frame in 3D" data-ar="معاينة الإطار">Inspect Frame</button>
+        </div>
+
+        <!-- Spec 2: Rectangular -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-model-code">RYK-02-RC</span>
+            <h3 data-en="Royyak Rectangular" data-ar="رؤياك مستطيل كلاسيك">Royyak Rectangular</h3>
+          </div>
+          <div class="spec-card-body">
+            <div class="spec-row">
+              <span class="spec-label" data-en="Frame Material" data-ar="مادة الإطار">Frame Material</span>
+              <span class="spec-val" data-en="Organic Black Acetate" data-ar="أسيتات أسود عضوي">Organic Black Acetate</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Lens Tech" data-ar="تقنية العدسات">Lens Tech</span>
+              <span class="spec-val" data-en="Anti-Blue & Scratch Defense" data-ar="حماية الضوء الأزرق والخدش">Anti-Blue & Scratch Defense</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Dimensions" data-ar="المقاسات">Dimensions</span>
+              <span class="spec-val">54-18-140 mm</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Weight" data-ar="الوزن">Weight</span>
+              <span class="spec-val">22.4 grams</span>
+            </div>
+          </div>
+          <button class="spec-select-btn" data-jump="180" data-en="Inspect Frame in 3D" data-ar="معاينة الإطار">Inspect Frame</button>
+        </div>
+
+        <!-- Spec 3: Tortoise -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-model-code">RYK-03-TR</span>
+            <h3 data-en="Royyak Havana Tortoise" data-ar="رؤياك تورتويس هافانا">Royyak Havana Tortoise</h3>
+          </div>
+          <div class="spec-card-body">
+            <div class="spec-row">
+              <span class="spec-label" data-en="Frame Material" data-ar="مادة الإطار">Frame Material</span>
+              <span class="spec-val" data-en="Hand-Cured Havana Tortoise" data-ar="أسيتات هافانا تورتويس يدوي">Hand-Cured Havana Tortoise</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Hinges" data-ar="المفصلات">Hinges</span>
+              <span class="spec-val" data-en="German 5-Barrel Screws" data-ar="مفصلات ألمانية ٥ محاور">German 5-Barrel Screws</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Dimensions" data-ar="المقاسات">Dimensions</span>
+              <span class="spec-val">52-20-145 mm</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label" data-en="Weight" data-ar="الوزن">Weight</span>
+              <span class="spec-val">24.1 grams</span>
+            </div>
+          </div>
+          <button class="spec-select-btn" data-jump="300" data-en="Inspect Frame in 3D" data-ar="معاينة الإطار">Inspect Frame</button>
+        </div>
+
+      </div>
+
+      <div class="spec-footer">
+        <p class="spec-guarantee" data-en="All Royyak Optics frames include 2-Year International Warranty & Complimentary Custom Microfiber Case." data-ar="تشمل جميع نظارات رؤياك ضمانًا دوليًا لمدة عامين وحافظة فاخرة مع قطعة تنظيف مخصصة.">All Royyak Optics frames include 2-Year International Warranty & Complimentary Custom Microfiber Case.</p>
+      </div>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
